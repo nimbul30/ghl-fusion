@@ -1,24 +1,27 @@
-// This file is the single source of truth for the Firebase configuration.
+// This is the complete and correct code for this file.
+// It initializes Firebase and exports the services your app needs.
 
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
+// ===================================================================
+// THIS IS THE ONLY PART OF THE FILE YOU NEED TO EDIT
+// Replace the placeholder object below with your actual firebaseConfig
+// that you have saved.
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY', // Replace with your actual credentials
-  authDomain: 'YOUR_AUTH_DOMAIN',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_STORAGE_BUCKET',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: 'YOUR_API_KEY_HERE',
+  authDomain: 'YOUR_AUTH_DOMAIN_HERE',
+  projectId: 'YOUR_PROJECT_ID_HERE',
+  storageBucket: 'YOUR_STORAGE_BUCKET_HERE',
+  messagingSenderId: 'YOUR_SENDER_ID_HERE',
+  appId: 'YOUR_APP_ID_HERE',
 };
+// ===================================================================
 
-// Initialize Firebase for client-side rendering
-// A check is made to prevent re-initializing the app on every hot-reload.
+// DO NOT TOUCH THE CODE BELOW THIS LINE
+// This code initializes and exports the Firebase services.
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Export the initialized Firebase services that the rest of your app will use.
-// These are the only things that should be imported from this file.
 export const auth = getAuth(app);
 export const db = getFirestore(app);
