@@ -1,17 +1,24 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// This file is the single source of truth for the Firebase configuration.
+
+import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyB-Lk2ZeuJg-MyS-egO2PDHoRiVCInK8R8',
-  authDomain: 'ghl-fusion-firebase.firebaseapp.com',
-  projectId: 'ghl-fusion-firebase',
-  storageBucket: 'ghl-fusion-firebase.firebasestorage.app',
-  messagingSenderId: '810057674335',
-  appId: '1:810057674335:web:84d83548a10c05716d35ea',
+  apiKey: 'YOUR_API_KEY', // Replace with your actual credentials
+  authDomain: 'YOUR_AUTH_DOMAIN',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: 'YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+  appId: 'YOUR_APP_ID',
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase for client-side rendering
+// A check is made to prevent re-initializing the app on every hot-reload.
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
+// Export the initialized Firebase services that the rest of your app will use.
+// These are the only things that should be imported from this file.
+export const auth = getAuth(app);
+export const db = getFirestore(app);
