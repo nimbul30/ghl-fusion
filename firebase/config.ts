@@ -10,13 +10,14 @@ import { getFirestore } from 'firebase/firestore';
 // Replace the placeholder object below with your actual firebaseConfig
 // that you have saved.
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY_HERE',
-  authDomain: 'YOUR_AUTH_DOMAIN_HERE',
-  projectId: 'YOUR_PROJECT_ID_HERE',
-  storageBucket: 'YOUR_STORAGE_BUCKET_HERE',
-  messagingSenderId: 'YOUR_SENDER_ID_HERE',
-  appId: 'YOUR_APP_ID_HERE',
+  apiKey: 'AIzaSyB-Lk2ZeuJg-MyS-egO2PDHoRiVCInK8R8',
+  authDomain: 'ghl-fusion-firebase.firebaseapp.com',
+  projectId: 'ghl-fusion-firebase',
+  storageBucket: 'ghl-fusion-firebase.firebasestorage.app',
+  messagingSenderId: '810057674335',
+  appId: '1:810057674335:web:84d83548a10c05716d35ea',
 };
+
 // ===================================================================
 
 // DO NOT TOUCH THE CODE BELOW THIS LINE

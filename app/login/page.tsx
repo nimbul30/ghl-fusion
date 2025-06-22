@@ -1,9 +1,10 @@
-'use client'; // <-- THIS LINE IS NOW FIXED
+'use client';
 
-import { useState } from 'react';
+// Import useEffect, which is the key to the fix
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../../context/AuthContext'; // CORRECT PATH: ../../
-import { auth } from '../../firebase/config'; // CORRECT PATH: ../../
+import { useAuth } from '../../context/AuthContext';
+import { auth } from '../../firebase/config';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -14,18 +15,22 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, loading } = useAuth(); // Also get loading state for robustness
 
-  if (user) {
-    router.push('/');
-    return null;
-  }
+  // THE FIX IS HERE:
+  // This useEffect handles the redirection logic correctly.
+  useEffect(() => {
+    // Only redirect if loading is complete and a user exists
+    if (!loading && user) {
+      router.push('/');
+    }
+  }, [user, loading, router]); // Dependency array
 
   const handleSignUp = async () => {
     setError(null);
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      router.push('/');
+      // No need to push here, the useEffect will handle it
     } catch (err: any) {
       setError(err.message);
     }
@@ -35,12 +40,18 @@ export default function LoginPage() {
     setError(null);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/');
+      // No need to push here, the useEffect will handle it
     } catch (err: any) {
       setError(err.message);
     }
   };
 
+  // While checking auth state or if user exists, render nothing
+  if (loading || user) {
+    return null;
+  }
+
+  // This is the JSX that will render only when loading is done AND there is no user
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
